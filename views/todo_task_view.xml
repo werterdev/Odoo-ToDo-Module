@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="todo_task_action" model="ir.actions.act_window">
+        <field name="name">ToDo Tasks</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="todo_task_search" model="ir.ui.view">
+        <field name="name">todo.task.search</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="owner"/>
+                <field name="project_id"/>
+                <filter name="is_done" string="Erledigt" domain="[('is_done', '=', 'True')]"/>
+                <filter name="is_done" string="Nicht Erledigt" domain="[('is_done', '=', 'False')]"/>
+                <group expand="0" string="Owner2001">
+                    <filter string="Zugeteilt" name="owner" context="{'group_by': 'owner'}"/>
+                    <filter string="Projekt" name="project_id" context="{'group_by': 'project_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="todo_task_form" model="ir.ui.view">
+        <field name="name">todo.task.form</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                            <field name="name"/>
+                            <!-- <field name="tags_ids" widget="many2many_tags"/> -->
+                    </group>
+                    <group>
+                        <group>
+                            <field name="owner"/>
+                            <field name="due_date"/>
+                            <field name="is_done"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Beschreibung">
+                            <group>
+                                <field name="project_id"/>
+                                <field name="effort"/>
+                                <field name="description"/>
+                            </group>
+                        </page>
+
+                        <page string="Infos">
+                            <group>
+                                <group>
+                                    <field name="create_date" string="Erstellungsdatum"/>
+                                    <field name="write_date" string="Bearbeitungsdatum"/>
+                                </group>
+                                <group>
+                                    <field name="create_uid" string="Erstellt von"/>
+                                    <field name="write_uid" string="Bearbeitet von"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_tree" model="ir.ui.view">
+        <field name="name">todo.task.tree</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <tree string="ToDo Tasks">
+                <field name="project_id"/>
+                <field name="name"/>
+                <field name="effort"/>
+                <field name="due_date"/>
+                <field name="owner"/>
+                <field name="is_done"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

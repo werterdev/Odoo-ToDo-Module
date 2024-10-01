@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<odoo>
+    <menuitem id="todo_menu_root" name="ToDo">
+        <menuitem id="todo_task_menu_action" action="todo_task_action" name="ToDo's"/>
+        <menuitem id="todo_project_menu_action" action="todo_project_action" name="Projects"/>
+    </menuitem>
+</odoo>
